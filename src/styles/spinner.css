@@ -1,0 +1,70 @@
+.spinner-grow,
+.spinner-border {
+  display: inline-block;
+  width: var(--xx-spinner-width);
+  height: var(--xx-spinner-height);
+  vertical-align: var(--xx-spinner-vertical-align);
+  border-radius: 50%;
+  animation: var(--xx-spinner-animation-speed) linear infinite
+    var(--xx-spinner-animation-name);
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg) /* rtl:ignore */;
+  }
+}
+.spinner-border {
+  --xx-spinner-width: 2rem;
+  --xx-spinner-height: 2rem;
+  --xx-spinner-vertical-align: -0.125em;
+  --xx-spinner-border-width: 0.25em;
+  --xx-spinner-animation-speed: 0.75s;
+  --xx-spinner-animation-name: spinner-border;
+  border: var(--xx-spinner-border-width) solid currentcolor;
+  border-right-color: transparent;
+}
+
+.spinner-border-sm {
+  --xx-spinner-width: 1rem;
+  --xx-spinner-height: 1rem;
+  --xx-spinner-border-width: 0.2em;
+}
+
+/* Added */
+.spinner-border-lg {
+  --xx-spinner-width: 4rem;
+  --xx-spinner-height: 4rem;
+  --xx-spinner-border-width: 0.4em;
+}
+
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: none;
+  }
+}
+.spinner-grow {
+  --xx-spinner-width: 2rem;
+  --xx-spinner-height: 2rem;
+  --xx-spinner-vertical-align: -0.125em;
+  --xx-spinner-animation-speed: 0.75s;
+  --xx-spinner-animation-name: spinner-grow;
+  background-color: currentcolor;
+  opacity: 0;
+}
+
+.spinner-grow-sm {
+  --xx-spinner-width: 1rem;
+  --xx-spinner-height: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner-border,
+  .spinner-grow {
+    --xx-spinner-animation-speed: 1.5s;
+  }
+}
