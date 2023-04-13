@@ -64,6 +64,17 @@ export default defineConfig({
     port: 3000
   },
 
+  ///////////////////////////////////////////////////////////////////////////
+  //
+  // This resolve configuration is part of the Vite solution for fixing the following error.
+  // Uncaught ReferenceError: global is not defined
+  // This is a known error that results from using aws-amplify.
+  // The docs don't have a solution specificaly for Vite, but do have a Vue/Vite solution
+  // that works the same for React/Vite
+  // https://docs.amplify.aws/lib/project-setup/create-application/q/platform/js/#vue-vite-config
+  //
+  ///////////////////////////////////////////////////////////////////////////
+
   resolve: {
     alias: [
       {

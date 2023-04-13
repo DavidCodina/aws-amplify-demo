@@ -2,6 +2,7 @@
  * @type {import('@types/aws-lambda').APIGatewayProxyHandler}
  */
 
+// ...
 exports.handler = async (event) => {
   // Our path was will be something like  /customers/1 such that the '1'
   // will be mapped to the event.pathParameters.customerId property.
