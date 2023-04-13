@@ -6,7 +6,7 @@ import { API } from 'aws-amplify'
 import { useTitle } from 'hooks'
 import { HR, Title, Waves, Button } from 'components'
 
-// This is the name of the API that we created earlier.
+// This is the name of the API that we created earlier
 // You can double-check the name by going to <rootDir>/amplify/backend/api (to see associated file name).
 const apiName = 'amplifyRest1'
 const customersPath = '/customers'
