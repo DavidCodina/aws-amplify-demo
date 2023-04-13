@@ -17,6 +17,15 @@
           "appId": "dwjmzbfuar0sd",
           "type": "cicd"
         }
+      },
+      "function": {
+        "customerHandler": {
+          "deploymentBucketName": "amplify-amplifydemo1-main-162136-deployment",
+          "s3Key": "amplify-builds/customerHandler-4f6a2f64325a31673273-build.zip"
+        }
+      },
+      "api": {
+        "amplifyRest1": {}
       }
     }
   }

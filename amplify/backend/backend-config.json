@@ -1,4 +1,27 @@
 {
+  "api": {
+    "amplifyRest1": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "Name",
+            "Arn"
+          ],
+          "category": "function",
+          "resourceName": "customerHandler"
+        }
+      ],
+      "providerPlugin": "awscloudformation",
+      "service": "API Gateway"
+    }
+  },
+  "function": {
+    "customerHandler": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
   "hosting": {
     "amplifyhosting": {
       "lastPushTimeStamp": "2023-04-11T23:17:46.046Z",
@@ -7,6 +30,22 @@
     }
   },
   "parameters": {
+    "AMPLIFY_function_customerHandler_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "customerHandler"
+        }
+      ]
+    },
+    "AMPLIFY_function_customerHandler_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "customerHandler"
+        }
+      ]
+    },
     "AMPLIFY_hosting_amplifyhosting_appId": {
       "usedBy": [
         {
