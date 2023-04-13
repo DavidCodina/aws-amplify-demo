@@ -1,18 +1,15 @@
 // Third-party imports...
 import { useState } from 'react'
+import { API } from 'aws-amplify'
 
 // Custom imports
 import { useTitle } from 'hooks'
 import { HR, Title, Waves, Button } from 'components'
 
-import { API } from 'aws-amplify' //* New
-
-//~ import awsExports from '../../aws-exports'
-
 // This is the name of the API that we created earlier.
 // You can double-check the name by going to <rootDir>/amplify/backend/api (to see associated file name).
-const apiName = 'amplifyRest1' //* New
-const customersPath = '/customers' //* New
+const apiName = 'amplifyRest1'
+const customersPath = '/customers'
 
 /* ========================================================================
                                 PageHome
@@ -21,22 +18,19 @@ const customersPath = '/customers' //* New
 const PageHome = () => {
   useTitle('Home')
 
-  /* ======================
-
-  ====================== */
-  //* New
-
   const [customerId, setCustomerId] = useState('')
   const [customers, setCustomers] = useState<any[]>([])
 
   // Function to fetch from our backend and update customers array
-  function getCustomer(/* e: any */) {
-    //! const customerId = e.input
-
+  function getCustomer() {
+    ///////////////////////////////////////////////////////////////////////////
+    //
     // Here we are calling the customerHandler() Lambda.
     // The Lambda is fairly dumb it merely takes in a customerId,
     // and gives you back a customer object:
     // { customerId: customerId, customerName: `Customer ${customerId}` }
+    //
+    ///////////////////////////////////////////////////////////////////////////
 
     // APIClass.get(
     //   apiName: string,
@@ -54,11 +48,47 @@ const PageHome = () => {
 
         setCustomers(newCustomers)
 
+        setCustomerId('')
+
         return res
       })
       .catch((err) => {
         console.log('err:', err)
       })
+  }
+
+  /* ======================
+      renderCustomers()
+  ====================== */
+
+  const renderCustomers = () => {
+    if (Array.isArray(customers) && customers.length > 0) {
+      return (
+        <section>
+          <h5 className='text-blue-500 font-bold text-center'>Customer Data</h5>
+
+          {customers.map((customer: any) => {
+            return (
+              <div
+                key={customer?.customerId}
+                className='mx-auto mb-4 p-3 bg-off-white border border-gray-200 rounded-lg'
+                style={{ maxWidth: 600 }}
+              >
+                <p className='mb-1'>
+                  <strong>Customer ID:</strong> {customer.customerId}
+                </p>
+
+                <p className='mb-0'>
+                  <strong>Customer Name:</strong> {customer.customerName}
+                </p>
+              </div>
+            )
+          })}
+        </section>
+      )
+    }
+
+    return null
   }
 
   /* ======================
@@ -78,16 +108,6 @@ const PageHome = () => {
 
       <HR style={{ marginBottom: 50 }} />
 
-      {/* <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum!!!
-      </p> */}
-
       <div
         className='mx-auto mb-4 p-3 bg-off-white border border-gray-200 rounded-lg'
         style={{ maxWidth: 600 }}
@@ -106,10 +126,6 @@ const PageHome = () => {
 
         <Button
           className='block w-full btn-sm font-bold'
-          //! onClick={() => {
-          //!   getCustomer(customerId)
-          //! }}
-
           onClick={getCustomer}
           variant='green'
         >
@@ -117,23 +133,7 @@ const PageHome = () => {
         </Button>
       </div>
 
-      <h2 style={{ visibility: customers.length > 0 ? 'visible' : 'hidden' }}>
-        Response
-      </h2>
-
-      {customers.map((customer: any) => {
-        return (
-          <div key={customer?.customerId}>
-            <p>
-              <strong>Customer ID:</strong> {customer.customerId}
-            </p>
-
-            <p>
-              <strong>Customer Name:</strong> {customer.customerName}
-            </p>
-          </div>
-        )
-      })}
+      {renderCustomers()}
 
       <Waves />
     </div>
