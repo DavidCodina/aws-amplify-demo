@@ -103,7 +103,7 @@ const PageHome = () => {
           textAlign: 'center'
         }}
       >
-        Home
+        Home Page
       </Title>
 
       <HR style={{ marginBottom: 50 }} />
